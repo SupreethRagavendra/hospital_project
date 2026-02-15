@@ -9,7 +9,6 @@
     </button>
 </div>
 
-<!-- Filters -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <form action="{{ route('doctor.lab-reports') }}" method="GET" class="row g-3">
@@ -31,7 +30,6 @@
     </div>
 </div>
 
-<!-- Reports Table -->
 <div class="card shadow-sm border-0">
     <div class="table-responsive">
         <table class="table align-middle table-hover mb-0">
@@ -105,7 +103,6 @@
     </div>
 </div>
 
-<!-- Upload Modal -->
 <div class="modal fade" id="uploadReportModal" tabindex="-1">
     <div class="modal-dialog">
         <form action="{{ route('doctor.lab-reports.store') }}" method="POST" enctype="multipart/form-data">
@@ -127,14 +124,14 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                     <input type="hidden" name="medical_record_id" value="{{ request('record_id') }}">
 
                     <div class="mb-3">
                         <label class="form-label">Report Title <span class="text-danger">*</span></label>
                         <input type="text" name="report_title" class="form-control" required placeholder="e.g. Annual Blood Work">
                     </div>
-                    
+
                     <div class="row g-3 mb-3">
                         <div class="col-6">
                             <label class="form-label">Report Type <span class="text-danger">*</span></label>
@@ -179,7 +176,7 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Auto-open modal if coming from a specific record/patient
+
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('patient_id') || urlParams.has('record_id')) {
             const modalElement = document.getElementById('uploadReportModal');

@@ -1,7 +1,7 @@
 @props(['status'])
 @php
     $colors = [
-      'active' => 'success', 
+      'active' => 'success',
       'inactive' => 'secondary',
       'pending' => 'warning',
       'completed' => 'primary',

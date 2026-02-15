@@ -5,40 +5,40 @@
 <div class="row g-4 mb-4">
     <div class="col-md-3">
         @include('components.stats-card', [
-            'count' => $myPatientsCount, 
-            'label' => 'My Patients', 
-            'icon' => 'users', 
+            'count' => $myPatientsCount,
+            'label' => 'My Patients',
+            'icon' => 'users',
             'color' => 'primary'
         ])
     </div>
     <div class="col-md-3">
         @include('components.stats-card', [
-            'count' => $myRecordsCount, 
-            'label' => 'Medical Records', 
-            'icon' => 'file-medical', 
+            'count' => $myRecordsCount,
+            'label' => 'Medical Records',
+            'icon' => 'file-medical',
             'color' => 'success'
         ])
     </div>
     <div class="col-md-3">
         @include('components.stats-card', [
-            'count' => $myPrescriptionsCount, 
-            'label' => 'Prescriptions', 
-            'icon' => 'prescription', 
+            'count' => $myPrescriptionsCount,
+            'label' => 'Prescriptions',
+            'icon' => 'prescription',
             'color' => 'info'
         ])
     </div>
     <div class="col-md-3">
         @include('components.stats-card', [
-            'count' => $pendingLabsCount, 
-            'label' => 'Pending Labs', 
-            'icon' => 'vial', 
+            'count' => $pendingLabsCount,
+            'label' => 'Pending Labs',
+            'icon' => 'vial',
             'color' => 'warning'
         ])
     </div>
 </div>
 
 <div class="row g-4">
-    <!-- Today's Appointments -->
+
     <div class="col-md-8">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-header bg-white fw-bold py-3">
@@ -86,7 +86,6 @@
         </div>
     </div>
 
-    <!-- Recent Patients -->
     <div class="col-md-4">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-header bg-white fw-bold py-3">
@@ -96,7 +95,7 @@
                 @forelse($recentPatients as $record)
                     <li class="list-group-item d-flex justify-content-between align-items-center py-3">
                         <div class="d-flex align-items-center">
-                            <div class="avatar-circle me-3 bg-light text-primary small">
+                            <div class="avatar-circle me-3">
                                 {{ substr($record->patient->user->name, 0, 1) }}
                             </div>
                             <div>

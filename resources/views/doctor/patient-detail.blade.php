@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row g-4 mb-4">
-    <!-- Patient Profile Card -->
+
     <div class="col-md-4">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body text-center p-5">
@@ -48,7 +48,6 @@
         </div>
     </div>
 
-    <!-- Right Content Area -->
     <div class="col-md-8">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white p-0 border-bottom-0">
@@ -66,7 +65,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="tab-content" id="patientTabsContent">
-                    <!-- Medical Records Tab -->
+
                     <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0 align-middle">
@@ -99,7 +98,6 @@
                         <div class="p-3 border-top">{{ $records->appends(['tab' => 'records'])->links() }}</div>
                     </div>
 
-                    <!-- Prescriptions Tab -->
                     <div class="tab-pane fade" id="prescriptions" role="tabpanel" aria-labelledby="prescriptions-tab">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0 align-middle">
@@ -125,8 +123,7 @@
                                             </td>
                                             <td class="text-end pe-4">
                                                 <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#scriptModal{{ $script->id }}">View</button>
-                                                
-                                                <!-- Modal for Script Details -->
+
                                                 <div class="modal fade text-start" id="scriptModal{{ $script->id }}" tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -158,7 +155,6 @@
                          <div class="p-3 border-top">{{ $prescriptions->appends(['tab' => 'prescriptions'])->links() }}</div>
                     </div>
 
-                    <!-- Lab Reports Tab -->
                     <div class="tab-pane fade" id="labs" role="tabpanel" aria-labelledby="labs-tab">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0 align-middle">

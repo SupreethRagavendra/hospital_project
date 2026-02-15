@@ -4,56 +4,65 @@
 @section('content')
 <div class="row g-4 mb-4">
     <div class="col-md-4">
-        <div class="card bg-primary text-white shadow-sm border-0 h-100">
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-start">
+        <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 20px;">
+            <div class="card-body p-4 position-relative" style="z-index: 2;">
+                <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-white-50 text-uppercase mb-2">Upcoming Appointment</h6>
+                        <div class="text-secondary small fw-bold text-uppercase mb-2" style="letter-spacing: 1px;">Next Appointment</div>
                         @if($nextAppointment)
-                            <h4 class="mb-1">{{ $nextAppointment->follow_up_date->format('M d, Y') }}</h4>
-                            <small class="text-white-50">Dr. {{ $nextAppointment->doctor->name }}</small>
+                            <h4 class="fw-bold text-dark mb-1">{{ $nextAppointment->follow_up_date->format('M d, Y') }}</h4>
+                            <div class="badge-soft badge-soft-primary small">Dr. {{ $nextAppointment->doctor->name }}</div>
                         @else
-                            <h4 class="mb-1">No appointments</h4>
-                            <small class="text-white-50">Schedule with your doctor</small>
+                            <h4 class="fw-bold text-muted mb-1">No Schedule</h4>
+                            <small class="text-secondary">Keep in touch with your doctor</small>
                         @endif
                     </div>
-                    <i class="fas fa-calendar-check fa-2x opacity-50"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card bg-success text-white shadow-sm border-0 h-100">
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <h6 class="text-white-50 text-uppercase mb-2">Active Prescriptions</h6>
-                        <h2 class="mb-0">{{ $activePrescriptions }}</h2>
+                    <div class="rounded-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background: rgba(99, 102, 241, 0.1);">
+                        <i class="fas fa-calendar-check fs-3 text-primary"></i>
                     </div>
-                    <i class="fas fa-pills fa-2x opacity-50"></i>
                 </div>
             </div>
+            <div class="position-absolute" style="bottom: -20px; right: -20px; width: 100px; height: 100px; background: rgba(99, 102, 241, 0.05); border-radius: 50%; z-index: 1;"></div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card bg-info text-white shadow-sm border-0 h-100">
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-start">
+        <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 20px;">
+            <div class="card-body p-4 position-relative" style="z-index: 2;">
+                <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-white-50 text-uppercase mb-2">Recent Vitals</h6>
+                        <div class="text-secondary small fw-bold text-uppercase mb-2" style="letter-spacing: 1px;">Active Prescriptions</div>
+                        <h2 class="fw-bold text-dark mb-0" style="font-size: 2.5rem;">{{ $activePrescriptions }}</h2>
+                    </div>
+                    <div class="rounded-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background: rgba(16, 185, 129, 0.1);">
+                        <i class="fas fa-pills fs-3 text-success"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="position-absolute" style="bottom: -20px; right: -20px; width: 100px; height: 100px; background: rgba(16, 185, 129, 0.05); border-radius: 50%; z-index: 1;"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 20px;">
+            <div class="card-body p-4 position-relative" style="z-index: 2;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="text-secondary small fw-bold text-uppercase mb-2" style="letter-spacing: 1px;">Recent Vitals</div>
                         @if($lastVitals)
-                        <div class="d-flex gap-3">
-                            <div><small>BP</small><div class="fw-bold">{{ $lastVitals['bp'] ?? '-' }}</div></div>
-                            <div><small>HR</small><div class="fw-bold">{{ $lastVitals['hr'] ?? '-' }}</div></div>
-                            <div><small>Wt</small><div class="fw-bold">{{ $lastVitals['weight'] ?? '-' }}kg</div></div>
+                        <div class="d-flex gap-3 mt-1">
+                            <div><div class="text-secondary small fw-bold">BP</div><div class="fw-bold text-dark">{{ $lastVitals['bp'] ?? '-' }}</div></div>
+                            <div><div class="text-secondary small fw-bold">HR</div><div class="fw-bold text-dark">{{ $lastVitals['hr'] ?? '-' }}</div></div>
+                            <div><div class="text-secondary small fw-bold">Weight</div><div class="fw-bold text-dark">{{ $lastVitals['weight'] ?? '-' }}kg</div></div>
                         </div>
                         @else
-                           <div class="fw-bold">No data</div>
+                           <div class="fw-bold text-muted mt-1">No recent data</div>
                         @endif
                     </div>
-                    <i class="fas fa-heartbeat fa-2x opacity-50"></i>
+                    <div class="rounded-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1);">
+                        <i class="fas fa-heartbeat fs-3 text-info"></i>
+                    </div>
                 </div>
             </div>
+            <div class="position-absolute" style="bottom: -20px; right: -20px; width: 100px; height: 100px; background: rgba(14, 165, 233, 0.05); border-radius: 50%; z-index: 1;"></div>
         </div>
     </div>
 </div>
@@ -131,7 +140,6 @@
     </div>
 </div>
 
-<!-- Record Detail Modal -->
 <div class="modal fade" id="recordDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

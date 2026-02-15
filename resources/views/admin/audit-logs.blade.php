@@ -9,21 +9,20 @@
     </a>
 </div>
 
-<!-- Filters -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <form action="{{ route('admin.audit-logs') }}" method="GET" class="row g-3">
             <div class="col-md-3">
-                <label class="form-label small fw-bold text-muted">Start Date</label>
-                <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                <label class="form-label small fw-bold text-secondary mb-1">Start Date</label>
+                <input type="date" name="start_date" class="form-control form-control-sm" value="{{ request('start_date') }}">
             </div>
             <div class="col-md-3">
-                <label class="form-label small fw-bold text-muted">End Date</label>
-                <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                <label class="form-label small fw-bold text-secondary mb-1">End Date</label>
+                <input type="date" name="end_date" class="form-control form-control-sm" value="{{ request('end_date') }}">
             </div>
             <div class="col-md-3">
-                <label class="form-label small fw-bold text-muted">Action Type</label>
-                <select name="action" class="form-select">
+                <label class="form-label small fw-bold text-secondary mb-1">Action Type</label>
+                <select name="action" class="form-select form-select-sm">
                     <option value="">All Actions</option>
                     @foreach($actions as $act)
                         <option value="{{ $act }}" {{ request('action') == $act ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $act)) }}</option>
@@ -31,8 +30,8 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label class="form-label small fw-bold text-muted">Role</label>
-                <select name="role" class="form-select">
+                <label class="form-label small fw-bold text-secondary mb-1">Role</label>
+                <select name="role" class="form-select form-select-sm">
                     <option value="">All Roles</option>
                     <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                     <option value="doctor" {{ request('role') == 'doctor' ? 'selected' : '' }}>Doctor</option>
@@ -40,26 +39,25 @@
                     <option value="system" {{ request('role') == 'system' ? 'selected' : '' }}>System</option>
                 </select>
             </div>
-            <div class="col-12 text-end">
-                <a href="{{ route('admin.audit-logs') }}" class="btn btn-light me-2">Reset</a>
-                <button type="submit" class="btn btn-primary px-4">Apply Filters</button>
+            <div class="col-12 text-end mt-4">
+                <a href="{{ route('admin.audit-logs') }}" class="btn btn-light px-4 me-2 rounded-3 fw-medium">Reset</a>
+                <button type="submit" class="btn btn-primary px-5 rounded-3 fw-bold">Apply Filters</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Logs Table -->
 <div class="card shadow-sm border-0">
     <div class="table-responsive">
         <table class="table align-middle table-hover mb-0">
-            <thead class="bg-light">
-                <tr>
-                    <th class="ps-4">Time</th>
-                    <th>User</th>
-                    <th>Role</th>
-                    <th>Action</th>
-                    <th>Description</th>
-                    <th class="text-end pe-4">IP Address</th>
+            <thead>
+                <tr class="bg-light">
+                    <th class="ps-4 py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Time</th>
+                    <th class="py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">User</th>
+                    <th class="py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Role</th>
+                    <th class="py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Action</th>
+                    <th class="py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Description</th>
+                    <th class="text-end pe-4 py-3 text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">IP Address</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,12 +74,12 @@
                             @endif
                         </td>
                         <td>
-                            <span class="badge bg-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }} bg-opacity-10 text-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }}">
+                            <span class="badge-soft badge-soft-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }}">
                                 {{ ucfirst($log->user_role) }}
                             </span>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">{{ $log->action }}</span>
+                            <span class="badge bg-light text-dark fw-medium border-0 shadow-none" style="font-size: 0.7rem;">{{ strtoupper($log->action) }}</span>
                         </td>
                         <td class="text-break" style="max-width: 400px;">
                             {{ $log->description }}

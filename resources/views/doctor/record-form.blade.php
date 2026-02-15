@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="card-body p-4">
-                
+
                 @if(isset($record))
                     <div class="alert alert-info d-flex align-items-center">
                         <i class="fas fa-user-circle fa-2x me-3"></i>

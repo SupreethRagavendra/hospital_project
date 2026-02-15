@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-md-8">
-        <!-- Edit Profile Card -->
+
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-white fw-bold py-3">
                 Edit Profile Information
@@ -77,7 +77,6 @@
             </div>
         </div>
 
-        <!-- Change Password Card -->
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white fw-bold py-3 text-danger">
                 Change Password
@@ -85,7 +84,7 @@
             <div class="card-body p-4">
                 <form action="{{ route('profile.password') }}" method="POST">
                     @csrf @method('PUT')
-                    
+
                     @if($errors->has('current_password'))
                         <div class="alert alert-danger">{{ $errors->first('current_password') }}</div>
                     @endif

@@ -9,7 +9,6 @@
     </a>
 </div>
 
-<!-- Filters -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <form action="{{ route('doctor.records') }}" method="GET" class="row g-3">
@@ -34,7 +33,6 @@
     </div>
 </div>
 
-<!-- Records List -->
 <div class="card shadow-sm border-0">
     <div class="table-responsive">
         <table class="table align-middle table-hover mb-0">

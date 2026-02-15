@@ -6,7 +6,6 @@
     <h3 class="fw-bold mb-0 text-dark">Lab Reports</h3>
 </div>
 
-<!-- Filters -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <form action="{{ route('patient.lab-reports') }}" method="GET" class="row g-3">
@@ -25,7 +24,6 @@
     </div>
 </div>
 
-<!-- Reports List -->
 <div class="card shadow-sm border-0">
     <div class="table-responsive">
         <table class="table align-middle table-hover mb-0">
@@ -74,7 +72,6 @@
     </div>
 </div>
 
-<!-- Report Detail Modal -->
 <div class="modal fade" id="detailModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content" id="modalContent">

@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row g-4 justify-content-center">
-    <!-- Main Record Info -->
+
     <div class="col-lg-8">
         <div class="card shadow-sm border-0 mb-4 h-100">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body p-4">
-                <!-- Patient Header (Small) -->
+
                 <div class="alert alert-light border d-flex align-items-center mb-4">
                     <div class="avatar-circle me-3 bg-secondary text-white small">
                         {{ substr($record->patient->user->name, 0, 1) }}
@@ -60,7 +60,6 @@
                     </div>
                 </div>
 
-                <!-- Vitals Grid -->
                 <div class="mb-4">
                     <h6 class="text-uppercase text-muted fw-bold small mb-3">Vital Signs</h6>
                     <div class="row g-3">
@@ -89,9 +88,8 @@
         </div>
     </div>
 
-    <!-- Sidebar: Prescriptions & Follow Up -->
     <div class="col-lg-4">
-        <!-- Follow Up Card -->
+
         @if($record->follow_up_date)
         <div class="card shadow-sm border-0 mb-4 bg-warning bg-opacity-10">
             <div class="card-body">
@@ -107,7 +105,6 @@
         </div>
         @endif
 
-        <!-- Prescriptions -->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0 fw-bold">Prescriptions</h6>
@@ -134,7 +131,6 @@
             </ul>
         </div>
 
-        <!-- Lab Reports -->
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0 fw-bold">Lab Reports</h6>
@@ -159,14 +155,13 @@
     </div>
 </div>
 
-<!-- Add Prescription Modal -->
 <div class="modal fade" id="addScriptModal" tabindex="-1">
     <div class="modal-dialog">
         <form action="{{ route('doctor.prescriptions.store') }}" method="POST">
             @csrf
             <input type="hidden" name="medical_record_id" value="{{ $record->id }}">
             <input type="hidden" name="patient_id" value="{{ $record->patient_id }}">
-            
+
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold">Add Prescription</h5>

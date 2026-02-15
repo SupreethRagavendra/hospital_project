@@ -3,44 +3,44 @@
 
 @section('content')
     <h2 class="fw-bold text-dark mb-4">Dashboard Overview</h2>
-    
+
     <div class="row g-4 mb-4">
         <div class="col-md-3">
             @include('components.stats-card', [
-                'count' => $totalPatients, 
-                'label' => 'Total Patients', 
-                'icon' => 'user-injured', 
+                'count' => $totalPatients,
+                'label' => 'Total Patients',
+                'icon' => 'user-injured',
                 'color' => 'primary'
             ])
         </div>
         <div class="col-md-3">
             @include('components.stats-card', [
-                'count' => $totalDoctors, 
-                'label' => 'Total Doctors', 
-                'icon' => 'user-md', 
+                'count' => $totalDoctors,
+                'label' => 'Total Doctors',
+                'icon' => 'user-md',
                 'color' => 'success'
             ])
         </div>
         <div class="col-md-3">
             @include('components.stats-card', [
-                'count' => $totalRecords, 
-                'label' => 'Total Records', 
-                'icon' => 'file-medical', 
+                'count' => $totalRecords,
+                'label' => 'Total Records',
+                'icon' => 'file-medical',
                 'color' => 'info'
             ])
         </div>
         <div class="col-md-3">
             @include('components.stats-card', [
-                'count' => $totalLabReports, 
-                'label' => 'Lab Reports', 
-                'icon' => 'flask', 
+                'count' => $totalLabReports,
+                'label' => 'Lab Reports',
+                'icon' => 'flask',
                 'color' => 'warning'
             ])
         </div>
     </div>
 
     <div class="row g-4">
-        <!-- Recent Activity -->
+
         <div class="col-md-8">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-white fw-bold py-3">
@@ -63,7 +63,7 @@
                                         {{ $log->user_name ?? 'System' }}
                                     </td>
                                     <td>
-                                        <span class="badge bg-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }} bg-opacity-10 text-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }}">
+                                        <span class="badge-soft badge-soft-{{ $log->user_role == 'admin' ? 'danger' : ($log->user_role == 'doctor' ? 'info' : ($log->user_role == 'patient' ? 'success' : 'secondary')) }}">
                                             {{ ucfirst($log->user_role) }}
                                         </span>
                                     </td>
@@ -90,7 +90,6 @@
             </div>
         </div>
 
-        <!-- Recent Patients -->
         <div class="col-md-4">
              <div class="card shadow-sm border-0 h-100">
                  <div class="card-header bg-white fw-bold py-3">
@@ -100,7 +99,7 @@
                      @forelse($recentPatients as $patient)
                          <li class="list-group-item d-flex justify-content-between align-items-center py-3">
                              <div class="d-flex align-items-center">
-                                 <div class="avatar-circle me-3 bg-light text-primary" style="width: 40px; height: 40px; font-size: 0.9rem;">
+                                 <div class="avatar-circle me-3">
                                      {{ substr($patient->user->name, 0, 1) }}
                                  </div>
                                  <div>
@@ -121,7 +120,6 @@
         </div>
     </div>
 
-    <!-- Charts Section -->
     <div class="row g-4 mt-1">
         <div class="col-md-6">
             <div class="card shadow-sm border-0">
@@ -149,7 +147,7 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Status Chart
+
         const statusCtx = document.getElementById('statusChart').getContext('2d');
         new Chart(statusCtx, {
             type: 'doughnut',
@@ -157,7 +155,7 @@
                 labels: {!! json_encode(array_keys($recordsByStatus)) !!},
                 datasets: [{
                     data: {!! json_encode(array_values($recordsByStatus)) !!},
-                    backgroundColor: ['#2563EB', '#059669', '#F59E0B'],
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b'],
                 }]
             },
             options: {
@@ -169,7 +167,6 @@
             }
         });
 
-        // Registration Chart
         const regCtx = document.getElementById('registrationChart').getContext('2d');
         const months = {!! json_encode(array_column($monthlyData, 'month')) !!};
         const counts = {!! json_encode(array_column($monthlyData, 'count')) !!};
@@ -181,8 +178,8 @@
                 datasets: [{
                     label: 'New Patients',
                     data: counts,
-                    borderColor: '#2563EB',
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
                     tension: 0.4,
                     fill: true
                 }]

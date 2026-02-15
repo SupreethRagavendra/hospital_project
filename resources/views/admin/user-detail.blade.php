@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row g-4">
-    <!-- User Profile Card -->
+
     <div class="col-md-4">
         <div class="card shadow-sm border-0 mb-4 h-100">
             <div class="card-body text-center p-5">
@@ -20,9 +20,9 @@
                         {{ $user->is_active ? 'Active' : 'Inactive' }}
                     </span>
                 </div>
-                
+
                 <hr class="my-4">
-                
+
                 <div class="text-start">
                     <div class="mb-3">
                         <small class="text-muted d-block uppercase fw-bold" style="font-size: 0.7rem;">PHONE</small>
@@ -59,9 +59,8 @@
         </div>
     </div>
 
-    <!-- Details Column -->
     <div class="col-md-8">
-        <!-- Role Specific Details -->
+
         @if($user->role === 'doctor')
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-white fw-bold py-3">
@@ -123,7 +122,6 @@
         </div>
         @endif
 
-        <!-- Recent Activity Logs -->
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white fw-bold py-3 d-flex justify-content-between align-items-center">
                 <span><i class="fas fa-history me-2 text-secondary"></i> Recent Activity</span>
@@ -159,7 +157,6 @@
     </div>
 </div>
 
-<!-- Edit User Modal -->
 <div class="modal fade" id="editUserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <form action="{{ route('admin.users.update', $user->id) }}" method="POST">

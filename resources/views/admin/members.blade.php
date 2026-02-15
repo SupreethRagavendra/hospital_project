@@ -23,7 +23,7 @@
 
 <div class="card shadow-sm border-0">
     @if(request('tab', 'doctors') == 'doctors')
-        <!-- doctors view -->
+
         <div class="table-responsive">
             <table class="table align-middle table-hover mb-0">
                 <thead class="bg-light">
@@ -41,25 +41,25 @@
                         <tr>
                             <td class="ps-4">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar-circle me-3 bg-info text-white">
+                                    <div class="avatar-circle me-3">
                                         {{ substr($doc->name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="fw-bold">{{ $doc->name }}</div>
+                                        <div class="fw-bold text-dark">{{ $doc->name }}</div>
                                         <small class="text-muted">{{ $doc->email }}</small>
                                     </div>
                                 </div>
                             </td>
                             <td>{{ $doc->specialization ?? 'General' }}</td>
-                            <td>{{ $doc->license_number ?? 'N/A' }}</td>
+                            <td><span class="small fw-bold text-secondary">{{ $doc->license_number ?? 'N/A' }}</span></td>
                             <td>{{ $doc->medical_records_count ?? 0 }} records</td>
                             <td>
-                                <span class="badge bg-{{ $doc->is_active ? 'success' : 'secondary' }}">
+                                <span class="badge-soft badge-soft-{{ $doc->is_active ? 'success' : 'secondary' }}">
                                     {{ $doc->is_active ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
                             <td class="text-end pe-4">
-                                <a href="{{ route('admin.users.show', $doc->id) }}" class="btn btn-sm btn-outline-primary">
+                                <a href="{{ route('admin.users.show', $doc->id) }}" class="btn btn-sm btn-light border-0 px-3">
                                     View Profile
                                 </a>
                             </td>
@@ -75,7 +75,7 @@
         </div>
 
     @else
-        <!-- patients view -->
+
         <div class="table-responsive">
             <table class="table align-middle table-hover mb-0">
                 <thead class="bg-light">
@@ -93,30 +93,30 @@
                         <tr>
                             <td class="ps-4">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar-circle me-3 bg-success text-white">
+                                    <div class="avatar-circle me-3" style="background-color: #f0fdf4; color: #16a34a;">
                                         {{ substr($p->user->name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="fw-bold">{{ $p->user->name }}</div>
+                                        <div class="fw-bold text-dark">{{ $p->user->name }}</div>
                                         <small class="text-muted">{{ $p->user->email }}</small>
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-monospace fw-bold">{{ $p->patient_id_number }}</td>
+                            <td class="font-monospace fw-bold text-secondary">{{ $p->patient_id_number }}</td>
                             <td>
                                 {{ $p->user->age }} yrs / {{ ucfirst($p->user->gender ?? 'N/A') }}
                             </td>
                             <td>
-                                <span class="badge bg-danger bg-opacity-10 text-danger border border-danger">
+                                <span class="badge-soft badge-soft-danger">
                                     {{ $p->user->blood_group ?? '?' }}
                                 </span>
                             </td>
                             <td>
-                                <div>{{ $p->emergency_contact ?? 'N/A' }}</div>
+                                <div class="small fw-bold">{{ $p->emergency_contact ?? 'N/A' }}</div>
                                 <small class="text-muted">{{ $p->emergency_phone }}</small>
                             </td>
                             <td class="text-end pe-4">
-                                <a href="{{ route('admin.users.show', $p->user_id) }}" class="btn btn-sm btn-outline-success">
+                                <a href="{{ route('admin.users.show', $p->user_id) }}" class="btn btn-sm btn-light border-0 px-3">
                                     View Profile
                                 </a>
                             </td>

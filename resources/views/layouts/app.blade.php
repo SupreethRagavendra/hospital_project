@@ -4,31 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page-title') - Secure EMR System</title>
-    
-    <!-- CDN Links -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #2563EB;
+            --primary-color: #6366f1;
+            --primary-rgb: 99, 102, 241;
+            --primary-hover: #4f46e5;
             --secondary-color: #64748B;
-            --success-color: #059669;
-            --danger-color: #DC2626;
-            --warning-color: #F59E0B;
-            --info-color: #3B82F6;
-            --dark-color: #1E293B;
-            --light-color: #F8FAFC;
+            --secondary-rgb: 100, 116, 139;
+            --success-color: #10b981;
+            --success-rgb: 16, 185, 129;
+            --danger-color: #ef4444;
+            --danger-rgb: 239, 68, 68;
+            --warning-color: #f59e0b;
+            --warning-rgb: 245, 158, 11;
+            --info-color: #0ea5e9;
+            --info-rgb: 14, 165, 233;
+            --dark-color: #0f172a;
+            --light-color: #f8fafc;
+            --bg-color: #f1f5f9;
+
+            --bs-primary: var(--primary-color);
+            --bs-primary-rgb: var(--primary-rgb);
+            --bs-success: var(--success-color);
+            --bs-success-rgb: var(--success-rgb);
+            --bs-danger: var(--danger-color);
+            --bs-danger-rgb: var(--danger-rgb);
+            --bs-warning: var(--warning-color);
+            --bs-warning-rgb: var(--warning-rgb);
+            --bs-info: var(--info-color);
+            --bs-info-rgb: var(--info-rgb);
+            --bs-body-bg: var(--bg-color);
+            --bs-body-font-family: 'Poppins', sans-serif;
         }
-        
+
+        .badge-soft {
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: capitalize;
+            border: 1px solid transparent;
+        }
+        .badge-soft-primary { background: rgba(99, 102, 241, 0.1) !important; color: #6366f1 !important; }
+        .badge-soft-success { background: rgba(16, 185, 129, 0.1) !important; color: #10b981 !important; }
+        .badge-soft-danger { background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; }
+        .badge-soft-info { background: rgba(14, 165, 233, 0.1) !important; color: #0ea5e9 !important; }
+        .badge-soft-warning { background: rgba(245, 158, 11, 0.1) !important; color: #f59e0b !important; }
+
+        .pagination {
+            gap: 5px;
+            margin-bottom: 0;
+        }
+        .page-link {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px !important;
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+        .page-link:hover {
+            background-color: #eef2ff;
+            color: var(--primary-color);
+        }
+        .pagination svg {
+            width: 20px;
+            height: 20px;
+        }
+        .pagination p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+        }
+
+        nav[role="navigation"] .flex.justify-between {
+            display: none !important;
+        }
+        nav[role="navigation"] .hidden.sm\:flex-1 {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        @media (min-width: 768px) {
+            nav[role="navigation"] .hidden.sm\:flex-1 {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F1F5F9;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: #334155;
             overflow-x: hidden;
         }
 
-        /* Sidebar */
+        .font-brand {
+            font-family: 'Cinzel', serif;
+        }
+
         .sidebar {
             width: 260px;
             height: 100vh;
@@ -41,14 +132,15 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
         }
-        
+
         .sidebar-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .sidebar-menu {
@@ -60,30 +152,32 @@
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            color: #CBD5E1;
+            padding: 14px 24px;
+            color: #94a3b8;
             text-decoration: none;
             transition: all 0.2s;
-            border-left: 3px solid transparent;
+            border-left: 4px solid transparent;
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .menu-item:hover, .menu-item.active {
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255,255,255,0.03);
             color: white;
             border-left-color: var(--primary-color);
         }
 
         .menu-item i {
             width: 25px;
-            margin-right: 10px;
-        }
-        
-        .sidebar-footer {
-            padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-right: 12px;
+            font-size: 1.1rem;
         }
 
-        /* Main Content */
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
         .main-content {
             margin-left: 260px;
             min-height: 100vh;
@@ -91,15 +185,15 @@
             flex-direction: column;
             transition: all 0.3s ease;
         }
-        
+
         .top-bar {
             background: white;
-            height: 70px;
-            padding: 0 30px;
+            height: 75px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 900;
@@ -107,19 +201,65 @@
 
         .content-body {
             flex: 1;
-            padding: 30px;
+            padding: 40px;
         }
 
         .footer {
             background: white;
-            padding: 20px 30px;
+            padding: 25px 40px;
             text-align: center;
             color: var(--secondary-color);
-            font-size: 0.9rem;
-            border-top: 1px solid #E2E8F0;
+            font-size: 0.85rem;
+            border-top: 1px solid #f1f5f9;
         }
 
-        /* Mobile Responsive */
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-control, .form-select {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -131,30 +271,60 @@
                 margin-left: 0;
             }
         }
-        
-        /* Utility */
+
         .avatar-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background-color: #eef2ff;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            .table td[data-label]::before {
+                content: attr(data-label) ": ";
+                font-weight: 600;
+                color: var(--primary-color);
+                display: inline-block;
+                margin-bottom: 0.25rem;
+            }
+            .table td {
+                display: block;
+                text-align: left !important;
+                padding: 0.75rem 0.5rem !important;
+                border: none !important;
+                border-bottom: 1px solid #dee2e6 !important;
+            }
+            .table th {
+                display: none;
+            }
+            .table tr {
+                display: block;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+            }
         }
     </style>
     @yield('styles')
 </head>
 <body>
-    <!-- Sidebar -->
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <i class="fas fa-heartbeat fa-2x text-primary"></i>
+            <i class="fas fa-heartbeat fa-2x text-primary" style="color: var(--primary-color) !important;"></i>
             <div>
-                <h5 class="mb-0 fw-bold">MediCare+</h5>
-                <small class="text-white-50">EMR System</small>
+                <h5 class="mb-0 fw-bold font-brand" style="letter-spacing: 1px;">MediCare+</h5>
+                <small class="text-white-50 small" style="letter-spacing: 0.5px;">EMR System</small>
             </div>
         </div>
 
@@ -220,15 +390,14 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Top Bar -->
+
         <div class="top-bar">
             <button class="btn btn-light d-md-none" id="sidebarToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <h5 class="mb-0 fw-bold text-dark d-none d-md-block">@yield('page-title')</h5>
-            
+
             <div class="d-flex align-items-center gap-3">
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
@@ -254,29 +423,25 @@
             </div>
         </div>
 
-        <!-- Content Body -->
         <div class="content-body">
             @include('components.alert')
             @yield('content')
         </div>
 
-        <!-- Footer -->
         <footer class="footer">
             <p class="mb-0">&copy; {{ date('Y') }} Secure EMR System. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Sidebar Toggle
+
         document.getElementById('sidebarToggle')?.addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('show');
         });
 
-        // Confirm Delete Helper
         function confirmDelete(formId) {
             Swal.fire({
                 title: 'Are you sure?',

@@ -9,7 +9,6 @@
     </button>
 </div>
 
-<!-- Filters -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <form action="{{ route('admin.users') }}" method="GET" class="row g-3">
@@ -41,7 +40,6 @@
     </div>
 </div>
 
-<!-- Users Table -->
 <div class="card shadow-sm border-0">
     <div class="table-responsive">
         <table class="table align-middle table-hover mb-0">
@@ -60,7 +58,7 @@
                     <tr>
                         <td class="ps-4">
                             <div class="d-flex align-items-center">
-                                <div class="avatar-circle me-3 bg-light text-primary" style="width: 35px; height: 35px; font-size: 0.8rem;">
+                                <div class="avatar-circle me-3">
                                     {{ substr($user->name, 0, 1) }}
                                 </div>
                                 <div>
@@ -70,16 +68,16 @@
                             </div>
                         </td>
                         <td>
-                            <span class="badge bg-{{ $user->role == 'admin' ? 'danger' : ($user->role == 'doctor' ? 'info' : 'success') }} bg-opacity-10 text-{{ $user->role == 'admin' ? 'danger' : ($user->role == 'doctor' ? 'info' : 'success') }}">
+                            <span class="badge-soft badge-soft-{{ $user->role == 'admin' ? 'danger' : ($user->role == 'doctor' ? 'info' : 'success') }}">
                                 {{ ucfirst($user->role) }}
                             </span>
                         </td>
                         <td>{{ $user->email }}</td>
                         <td>
                             @if($user->is_active)
-                                <span class="badge bg-success">Active</span>
+                                <span class="badge-soft badge-soft-success">Active</span>
                             @else
-                                <span class="badge bg-secondary">Inactive</span>
+                                <span class="badge-soft badge-soft-secondary">Inactive</span>
                             @endif
                         </td>
                         <td class="text-muted small">
@@ -129,7 +127,6 @@
     </div>
 </div>
 
-<!-- Create User Modal -->
 <div class="modal fade" id="createUserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <form action="{{ route('admin.users.store') }}" method="POST">
@@ -180,7 +177,6 @@
                             <textarea name="address" class="form-control" rows="2"></textarea>
                         </div>
 
-                        <!-- Doctor Fields -->
                         <div class="col-12 role-fields d-none" id="doctorFields">
                             <h6 class="text-primary border-bottom pb-2 mt-2">Doctor Details</h6>
                             <div class="row g-3">
@@ -195,7 +191,6 @@
                             </div>
                         </div>
 
-                        <!-- Patient Fields -->
                         <div class="col-12 role-fields d-none" id="patientFields">
                             <h6 class="text-primary border-bottom pb-2 mt-2">Patient Details</h6>
                             <div class="row g-3">
@@ -254,26 +249,25 @@
 @section('scripts')
 <script>
     document.getElementById('roleSelect').addEventListener('change', function() {
-        // Hide all fields first
+
         document.querySelectorAll('.role-fields').forEach(el => el.classList.add('d-none'));
-        
-        // Show specific fields based on selection
+
         if (this.value === 'doctor') {
             document.getElementById('doctorFields').classList.remove('d-none');
-            // Add required attributes
+
             document.querySelector('[name="specialization"]').required = true;
             document.querySelector('[name="license_number"]').required = true;
-            // Remove patient requirements
+
             document.querySelector('[name="date_of_birth"]').required = false;
         } else if (this.value === 'patient') {
             document.getElementById('patientFields').classList.remove('d-none');
-            // Add required attributes
+
             document.querySelector('[name="date_of_birth"]').required = true;
-            // Remove doctor requirements
+
             document.querySelector('[name="specialization"]').required = false;
             document.querySelector('[name="license_number"]').required = false;
         } else {
-            // Remove all specific requirements
+
             document.querySelector('[name="specialization"]').required = false;
             document.querySelector('[name="license_number"]').required = false;
             document.querySelector('[name="date_of_birth"]').required = false;

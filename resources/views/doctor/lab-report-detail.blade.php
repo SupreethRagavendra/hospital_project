@@ -14,7 +14,7 @@
                 </span>
             </div>
             <div class="card-body p-4">
-                <!-- Patient Info -->
+
                 <div class="alert alert-light border d-flex align-items-center mb-4">
                     <div class="avatar-circle me-3 bg-secondary text-white small">
                         {{ substr($report->patient->user->name, 0, 1) }}

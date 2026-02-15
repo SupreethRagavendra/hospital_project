@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Secure EMR System</title>
-    
-    <!-- CDN Links -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
-    
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #dbeafe; /* Tailwind blue-50 */
+            background: #dbeafe;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -30,7 +29,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .form-control {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -59,7 +58,7 @@
             border-color: #4f46e5;
             transform: translateY(-1px);
         }
-        
+
         .illustration-bg {
             background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
             position: relative;

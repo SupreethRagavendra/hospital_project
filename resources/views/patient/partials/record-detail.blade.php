@@ -1,4 +1,13 @@
-<div class="row g-4">
+<div class="modal-header border-bottom">
+    <h5 class="modal-title fw-bold">
+        <i class="fas fa-file-medical me-2 text-primary"></i>
+        Medical Record Details
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body p-0" style="max-height: 75vh; overflow-y: auto;">
+    <div class="p-4">
+        <div class="row g-4">
     <div class="col-md-5">
         <h6 class="fw-bold mb-3 border-bottom pb-2">Record Information</h6>
         <div class="small mb-3">
@@ -20,70 +29,99 @@
     </div>
     <div class="col-md-7">
         <h6 class="fw-bold mb-3 border-bottom pb-2">Medical Details</h6>
-        
+
         <div class="mb-3">
-            <label class="small text-muted fw-bold">CHIEF COMPLAINT</label>
-            <p class="mb-0">{{ $record->chief_complaint }}</p>
+            <label class="small text-muted fw-bold d-block">CHIEF COMPLAINT</label>
+            <div class="bg-light p-3 rounded border-start border-4 border-primary">
+                <p class="mb-0">{{ $record->chief_complaint }}</p>
+            </div>
         </div>
 
         <div class="mb-3">
-            <label class="small text-muted fw-bold">DIAGNOSIS</label>
-            <div class="bg-light p-2 rounded border">{{ $record->diagnosis }}</div>
+            <label class="small text-muted fw-bold d-block">DIAGNOSIS</label>
+            <div class="bg-success bg-opacity-10 p-3 rounded border-start border-4 border-success">
+                <div class="fw-bold">{{ $record->diagnosis }}</div>
+            </div>
         </div>
 
         @if($record->treatment_plan)
         <div class="mb-3">
-            <label class="small text-muted fw-bold">TREATMENT PLAN</label>
-            <p class="mb-0 small">{{Str::limit($record->treatment_plan, 200)}}</p>
+            <label class="small text-muted fw-bold d-block">TREATMENT PLAN</label>
+            <div class="bg-info bg-opacity-10 p-3 rounded border-start border-4 border-info">
+                <p class="mb-0">{{ $record->treatment_plan }}</p>
+            </div>
         </div>
         @endif
     </div>
 
-    <!-- Linked Items -->
     <div class="col-12">
         <div class="accordion accordion-flush" id="linkedItems">
             @if($record->prescriptions->count() > 0)
-            <div class="accordion-item">
+            <div class="accordion-item border">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed py-2 small fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#prescriptions">
+                    <button class="accordion-button collapsed py-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#prescriptions">
+                        <i class="fas fa-prescription me-2 text-primary"></i>
                         Prescriptions ({{ $record->prescriptions->count() }})
                     </button>
                 </h2>
                 <div id="prescriptions" class="accordion-collapse collapse" data-bs-parent="#linkedItems">
                     <div class="accordion-body p-0">
-                        <ul class="list-group list-group-flush">
+                        <div class="list-group list-group-flush">
                             @foreach($record->prescriptions as $p)
-                                <li class="list-group-item small">
-                                    <strong>{{ $p->medication_name }}</strong> - {{ $p->dosage }}
-                                </li>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong class="text-primary">{{ $p->medication_name }}</strong>
+                                        <div class="small text-muted">{{ $p->dosage }}</div>
+                                    </div>
+                                    <span class="badge bg-primary bg-opacity-10 text-primary">
+                                        <i class="fas fa-pills"></i>
+                                    </span>
+                                </div>
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             @endif
 
             @if($record->labReports->count() > 0)
-            <div class="accordion-item">
+            <div class="accordion-item border">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed py-2 small fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#labs">
+                    <button class="accordion-button collapsed py-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#labs">
+                        <i class="fas fa-flask me-2 text-success"></i>
                         Lab Reports ({{ $record->labReports->count() }})
                     </button>
                 </h2>
                 <div id="labs" class="accordion-collapse collapse" data-bs-parent="#linkedItems">
                     <div class="accordion-body p-0">
-                        <ul class="list-group list-group-flush">
+                        <div class="list-group list-group-flush">
                             @foreach($record->labReports as $l)
-                                <li class="list-group-item small d-flex justify-content-between">
-                                    <span>{{ $l->report_title }}</span>
-                                    <a href="{{ route('patient.lab-reports.download', $l->id) }}" class="text-decoration-none">Download</a>
-                                </li>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>{{ $l->report_title }}</strong>
+                                        <div class="small text-muted">{{ $l->created_at->format('M d, Y') }}</div>
+                                    </div>
+                                    <a href="{{ route('patient.lab-reports.download', $l->id) }}" class="btn btn-sm btn-outline-success" title="Download Report">
+                                        <i class="fas fa-download me-1"></i> Download
+                                    </a>
+                                </div>
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             @endif
         </div>
     </div>
+    </div>
+</div>
+<div class="modal-footer border-top bg-light">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <i class="fas fa-times me-1"></i> Close
+    </button>
+    @if($record->prescriptions->count() > 0)
+        <button type="button" class="btn btn-primary" onclick="window.print()">
+            <i class="fas fa-print me-1"></i> Print
+        </button>
+    @endif
 </div>
